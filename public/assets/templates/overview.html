@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h2>Your pass</h2>
+{% if imagePath %}
+<div>
+  <img class="pass" src="{{ imagePath }}" alt="your pass" />
+</div>
+{% else %}
+<div class="info">Your pass has not been generated yet.</div>
+{% endif %}
+
+{% if not hasUserFullName %}
+<div class="error">You need to log out and to set your full name in Karrot first.</div>
+{% endif %}
+{% if not hasUserPhoto %}
+<div class="error">You need to log out and to upload a picture to Karrot first.</div>
+{% endif %}
+
+<div class="button-bar">
+  {% if imagePath %}
+  <a class="button" href="{{ imagePath }}" download="{{ siteName }} Foodsaver Pass.png">Download</a>
+  <button class="button" id="delete-pass">Delete</button>
+  {% endif %}
+  {% if hasUserFullName and hasUserPhoto %}
+  <button class="button" id="create-pass">Generate</button>
+  {% endif %}
+  <a class="button" href="/logout">Log out</a>
+</div>
+
+<script>
+const deletePassButton = document.getElementById('delete-pass');
+if (deletePassButton) {
+  deletePassButton.addEventListener('click', () => {
+    if (window.confirm('Do you really want to delete your pass?')) {
+      deletePassButton.disabled = true;
+      fetch('pass', { method: 'delete' })
+        .then(() => {
+          location.reload();
+        });
+    }
+  });
+}
+const createPassButton = document.getElementById('create-pass');
+if (createPassButton) {
+  createPassButton.addEventListener('click', () => {
+    createPassButton.disabled = true;
+    fetch('pass', { method: 'post' })
+      .then(() => {
+        location.reload();
+      });
+  });
+}
+</script>
+{% endblock %}

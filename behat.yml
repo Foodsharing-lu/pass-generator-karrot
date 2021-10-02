@@ -1,0 +1,13 @@
+default:
+  extensions:
+    DVDoug\Behat\CodeCoverage\Extension:
+      filter:
+        include:
+          directories:
+            'public': ~
+        exclude:
+          directories:
+            'public/config': ~
+      reports:
+        html:
+          target: coverage-behat

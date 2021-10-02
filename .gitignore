@@ -1,0 +1,6 @@
+# root
+/.idea
+/coverage
+/coverage-behat
+/public/passes
+/vendor

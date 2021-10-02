@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h2>Log in with your Karrot account</h2>
+{% if error == "invalid-credentials" %}
+<div class="error">Your e-mail address or your password are wrong!</div>
+{% endif %}
+{% if error == "login-failed" %}
+<div class="error">Logging in has failed!</div>
+{% endif %}
+{% if error == "no-connection" %}
+<div class="error">There was a problem connecting to the Karrot server!</div>
+{% endif %}
+{% if error == "not-in-group" %}
+<div class="error">You are not in the group configured!</div>
+{% endif %}
+{% if info == "logged-out" %}
+<div class="info">You have been logged out!</div>
+{% endif %}
+{% if info == "not-logged-in" %}
+<div class="info">You need to log in!</div>
+{% endif %}
+<form method="post">
+  <div>
+    <label for="email">E-mail address</label>
+    <input type="text" name="email" id="email">
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+  </div>
+  <div>
+    <input class="button" type="submit" value="Log in">
+  </div>
+</form>
+{% endblock %}
