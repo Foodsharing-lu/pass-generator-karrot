@@ -23,7 +23,7 @@ PHP 8 is used.
 - [phpspec](https://www.phpspec.net/en/stable/) for unit tests
 
 ## Development setup
-1. Install the dependencies: `composer update`
+1. Install the dependencies: `composer install`
 2. Add logo for website as `public/assets/images/logo.png`.
 3. Add pass background image as `public/assets/images/pass-background.png`.
 4. Copy `public/config/config.sample.php` to `public/config/config.php` and adapt its content.

@@ -30,5 +30,5 @@
         "friends-of-phpspec/phpspec-code-coverage": "^6.1",
         "dvdoug/behat-code-coverage": "^5.2"
     },
-    "version": "0.1"
+    "version": "0.1.0"
 }
