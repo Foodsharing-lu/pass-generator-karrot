@@ -14,21 +14,21 @@
         "php": "^8.0",
         "ext-gd": "*",
         "ext-imagick": "*",
-        "guzzlehttp/guzzle": "^7.3",
-        "slim/slim": "4.*",
-        "slim/psr7": "^1.4",
-        "slim/twig-view": "^3.2",
-        "endroid/qr-code": "^4.2",
-        "monolog/monolog": "^2.3"
+        "guzzlehttp/guzzle": "~7.4.2",
+        "slim/slim": "~4.10.0",
+        "slim/psr7": "~1.5.0",
+        "slim/twig-view": "~3.3.0",
+        "endroid/qr-code": "~4.4.8",
+        "monolog/monolog": "~2.5.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
-        "behat/behat": "^3.8",
-        "phpspec/phpspec": "^7.0",
-        "squizlabs/php_codesniffer": "^3.6",
-        "phan/phan": "5.x",
-        "friends-of-phpspec/phpspec-code-coverage": "^6.1",
-        "dvdoug/behat-code-coverage": "^5.2"
+        "behat/behat": "~3.10.0",
+        "phpspec/phpspec": "~7.2.0",
+        "squizlabs/php_codesniffer": "~3.6.2",
+        "phan/phan": "~5.3.2",
+        "friends-of-phpspec/phpspec-code-coverage": "~6.1.0",
+        "dvdoug/behat-code-coverage": "~5.2.2"
     },
     "version": "0.1.0"
 }

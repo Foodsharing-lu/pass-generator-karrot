@@ -72,24 +72,24 @@ $app->post('/', function ($request, $response) use ($app, $interactor) {
         LoggerWrapper::warning('The server could not be connected to.');
         $routeParser = $app->getRouteCollector()->getRouteParser();
         $url = $routeParser->urlFor('home', [], ['error' => 'no-connection']);
-        return $response->withHeader('Location', $url);
+        return $response->withHeader('Location', $url)->withStatus(302);
     } catch (InvalidCredentialsException $e) {
         LoggerWrapper::warning('The e-mail address or the password are wrong: ' . $e->getMessage());
         $routeParser = $app->getRouteCollector()->getRouteParser();
         $url = $routeParser->urlFor('home', [], ['error' => 'invalid-credentials']);
-        return $response->withHeader('Location', $url);
+        return $response->withHeader('Location', $url)->withStatus(302);
     } catch (UserNotInGroupException $e) {
         LoggerWrapper::warning('The user is not in the group: ' . $e->getMessage());
         $routeParser = $app->getRouteCollector()->getRouteParser();
         $url = $routeParser->urlFor('home', [], ['error' => 'not-in-group']);
-        return $response->withHeader('Location', $url);
+        return $response->withHeader('Location', $url)->withStatus(302);
     }
     if ($interactor->isLoggedIn()) {
-        return $response->withHeader('Location', '/');
+        return $response->withHeader('Location', '/')->withStatus(302);
     } else {
         $routeParser = $app->getRouteCollector()->getRouteParser();
         $url = $routeParser->urlFor('home', [], ['error' => 'login-failed']);
-        return $response->withHeader('Location', $url);
+        return $response->withHeader('Location', $url)->withStatus(302);
     }
 });
 
@@ -113,11 +113,11 @@ $app->get('/logout', function ($request, $response) use ($app, $interactor) {
     $routeParser = $app->getRouteCollector()->getRouteParser();
     if (!$interactor->isLoggedIn()) {
         $url = $routeParser->urlFor('home', [], ['info' => 'not-logged-in']);
-        return $response->withHeader('Location', $url);
+        return $response->withHeader('Location', $url)->withStatus(302);
     }
     $interactor->logOut();
     $url = $routeParser->urlFor('home', [], ['info' => 'logged-out']);
-    return $response->withHeader('Location', $url);
+    return $response->withHeader('Location', $url)->withStatus(302);
 });
 
 $app->run();
