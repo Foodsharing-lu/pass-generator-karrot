@@ -58,6 +58,7 @@ h2 {
 
 .error,
 .info {
+  border-radius: 5px;
   color: white;
   font-size: 16px;
   font-weight: bold;
