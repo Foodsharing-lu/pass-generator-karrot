@@ -8,6 +8,7 @@ It uses the [Karrot API](https://karrot.world/docs/).
 
 ## Technologies
 PHP 8 is used.
+Composer is used as dependency manager.
 
 ### Libraries used
 - [Guzzle](https://docs.guzzlephp.org/en/stable/) as HTTP client
