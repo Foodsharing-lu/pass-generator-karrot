@@ -51,13 +51,13 @@ Composer is used as dependency manager.
 - Execute Phan: `vendor/bin/phan`
 
 ## Deployment
-- Copy the following folders and files:
-  - `log/*`
-  - `public/*` without the folder for passes
-  - `composer.json`
-  - `composer.lock`
-- Copy `public/config/config.sample.php` to `public/config/config.php` and adapt its content.
-- Create the folder for the passes manually; It needs to be the same you have set in the config file (see previous step).
-- Run: `composer install --no-dev`
-- Make sure the server serves the `public` folder only.
-- Configure your server to not pass `favicon.ico` requests to this application to not spam the `app.log` file.
+1. Copy the following folders and files:
+   - `log/*`
+   - `public/*` without the folder for passes
+   - `composer.json`
+   - `composer.lock`
+2. Copy `public/config/config.sample.php` to `public/config/config.php` and adapt its content.
+3. Create the folder for the passes manually; It needs to be the same you have set in the config file (see previous step).
+4. Run: `composer install --no-dev`
+5. Make sure the server serves the `public` folder only.
+6. Configure your server to not pass `favicon.ico` requests to this application to not spam the `app.log` file.
