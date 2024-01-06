@@ -14,12 +14,12 @@
         "php": "^8.0",
         "ext-gd": "*",
         "ext-imagick": "*",
-        "guzzlehttp/guzzle": "~7.4.2",
-        "slim/slim": "~4.10.0",
-        "slim/psr7": "~1.5.0",
+        "guzzlehttp/guzzle": "~7.8.1",
+        "slim/slim": "~4.12.0",
+        "slim/psr7": "~1.6.1",
         "slim/twig-view": "~3.3.0",
-        "endroid/qr-code": "~4.4.8",
-        "monolog/monolog": "~2.5.0"
+        "endroid/qr-code": "~5.0.4",
+        "monolog/monolog": "~2.9.2"
     },
     "require-dev": {
         "ext-xdebug": "*",

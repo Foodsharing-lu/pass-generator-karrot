@@ -4,8 +4,8 @@ namespace App;
 
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelQuartile;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeNone;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\RoundBlockSizeMode;
 
 class QRCodeImageGenerator
 {
@@ -19,10 +19,10 @@ class QRCodeImageGenerator
         $result = Builder::create()
             ->data($url)
             ->encoding(new Encoding('UTF-8'))
-            ->errorCorrectionLevel(new ErrorCorrectionLevelQuartile())
+            ->errorCorrectionLevel(ErrorCorrectionLevel::Quartile)
             ->size($sizeWithoutMargin)
             ->margin(self::MARGIN_IN_PIXELS)
-            ->roundBlockSizeMode(new RoundBlockSizeModeNone())
+            ->roundBlockSizeMode(RoundBlockSizeMode::None)
             ->build();
         return $result->getString();
     }
