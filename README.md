@@ -36,10 +36,10 @@ Composer is used as dependency manager.
 - Check for direct dependency updates: `composer outdated --direct`
 
 ### Tests
-- Execute behat: `vendor/bin/behat`
+- Execute behat: `XDEBUG_MODE=coverage vendor/bin/behat`
   - A code coverage report is generated in the folder `/coverage-behat`.
 - Add automatically generated snippets: `vendor/bin/behat --dry-run --append-snippets`
-- Execute tests via phpspec with code coverage report generation: `vendor/bin/phpspec run`
+- Execute tests via phpspec with code coverage report generation: `XDEBUG_MODE=coverage vendor/bin/phpspec run`
   - A code coverage report is generated in the folder `/coverage`.
   - Add `-v` to see more details.
   - Add the path to a test file to only execute that class.
