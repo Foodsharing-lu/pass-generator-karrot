@@ -23,12 +23,12 @@
     },
     "require-dev": {
         "ext-xdebug": "*",
-        "behat/behat": "~3.10.0",
-        "phpspec/phpspec": "~7.2.0",
-        "squizlabs/php_codesniffer": "~3.6.2",
-        "phan/phan": "~5.3.2",
-        "friends-of-phpspec/phpspec-code-coverage": "~6.1.0",
-        "dvdoug/behat-code-coverage": "~5.2.2"
+        "behat/behat": "~3.13.0",
+        "phpspec/phpspec": "~7.4.0",
+        "squizlabs/php_codesniffer": "~3.7.2",
+        "phan/phan": "~5.4.3",
+        "friends-of-phpspec/phpspec-code-coverage": "~6.3.0",
+        "dvdoug/behat-code-coverage": "~5.3.2"
     },
     "version": "0.1.0"
 }
