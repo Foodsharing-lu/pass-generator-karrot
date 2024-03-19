@@ -25,14 +25,14 @@ class AuthenticatorSpec extends ObjectBehavior
     public function it_logIn_empty_password()
     {
         $this->isLoggedIn()->shouldReturn(false);
-        $this->shouldThrow('App\Exception\InvalidCredentialsException')->duringLogIn('a', '', 1);
+        $this->shouldThrow('App\Exception\InvalidCredentialsException')->duringLogIn('a', '', array(1));
         $this->isLoggedIn()->shouldReturn(false);
     }
 
     public function it_logIn_invalid()
     {
         $this->isLoggedIn()->shouldReturn(false);
-        $this->shouldThrow('App\Exception\InvalidCredentialsException')->duringLogIn('a', 'b', 1);
+        $this->shouldThrow('App\Exception\InvalidCredentialsException')->duringLogIn('a', 'b', array(1));
         $this->isLoggedIn()->shouldReturn(false);
     }
 

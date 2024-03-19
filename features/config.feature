@@ -11,9 +11,9 @@ Feature: Configuration files
 
   Scenario: Getting the group option
     Given there is a configuration file
-    And the option 'karrot-group-id' is configured to '0'
+    And the option 'karrot-group-ids' is configured to '0'
     When I load the configuration file
-    Then I should get '0' as 'karrot-group-id' option
+    Then I should get '0' as 'karrot-group-ids' option
 
   Scenario: Getting the pass folder option
     Given there is a configuration file

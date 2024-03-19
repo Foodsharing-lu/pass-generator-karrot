@@ -32,4 +32,13 @@ class Config
 
         return $this->settings[$option];
     }
+
+    public function getArray(string $option): array
+    {
+        if (!isset($this->settings[$option])) {
+            throw new MissingConfigOptionException('Option "' . $option . '" is not set.');
+        }
+
+        return $this->settings[$option];
+    }
 }

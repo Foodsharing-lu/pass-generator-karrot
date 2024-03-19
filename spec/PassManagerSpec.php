@@ -9,7 +9,7 @@ use PhpSpec\Exception\Example\FailureException;
 class PassManagerSpec extends ObjectBehavior
 {
     private const PASS_FOLDER = 'spec/passes/';
-    private const PASS_FILE_NAME = 'a';
+    private const PASS_ID = 'a';
 
     public function getMatchers(): array
     {
@@ -24,7 +24,7 @@ class PassManagerSpec extends ObjectBehavior
                 return true;
             },
             'fileNotExist' => function () {
-                $path = self::PASS_FOLDER . self::PASS_FILE_NAME . PassManager::FILE_EXTENSION;
+                $path = self::PASS_FOLDER . self::PASS_ID . PassManager::FILE_EXTENSION;
                 if (file_exists($path)) {
                     throw new FailureException(
                         sprintf('the file "%s" should not exist', $path)
@@ -43,7 +43,7 @@ class PassManagerSpec extends ObjectBehavior
         }
         $image = imagecreatetruecolor(1, 1);
         try {
-            imagepng($image, self::PASS_FOLDER . self::PASS_FILE_NAME . PassManager::FILE_EXTENSION);
+            imagepng($image, self::PASS_FOLDER . self::PASS_ID . PassManager::FILE_EXTENSION);
         } catch (\Exception $e) {
             throw new \Exception('You have no permission to create files in this directory: ' . $e);
         }
@@ -56,8 +56,8 @@ class PassManagerSpec extends ObjectBehavior
 
     public function it_creates_complete_passport_image_path()
     {
-        $this->getCompletePassImagePath(self::PASS_FOLDER, self::PASS_FILE_NAME)
-                ->shouldReturn(self::PASS_FOLDER . self::PASS_FILE_NAME . '.png');
+        $this->getCompletePassImagePath(self::PASS_FOLDER, self::PASS_ID)
+                ->shouldReturn(self::PASS_FOLDER . self::PASS_ID . '.png');
     }
 
     public function it_throws_exception_if_folder_path_is_null()
@@ -68,32 +68,32 @@ class PassManagerSpec extends ObjectBehavior
     public function it_getCompletePassportImagePath_trailingSlash()
     {
         $this->shouldThrow('InvalidArgumentException')
-                ->duringGetCompletePassImagePath('a', self::PASS_FILE_NAME);
+                ->duringGetCompletePassImagePath('a', self::PASS_ID);
     }
 
     public function it_returns_the_file_name()
     {
-        $this->getFileName('a')->shouldReturn('a.png');
+        $this->getFileName(self::PASS_ID)->shouldReturn(self::PASS_ID . '.png');
     }
 
     public function it_checks_pass_existence()
     {
-        $this->hasPass(self::PASS_FOLDER, self::PASS_FILE_NAME)->shouldReturn(true);
+        $this->hasPass(self::PASS_FOLDER, self::PASS_ID)->shouldReturn(true);
     }
 
     public function it_deletes_pass()
     {
-        $this->deletePass(self::PASS_FOLDER, self::PASS_FILE_NAME)->shouldFileNotExist();
+        $this->deletePass(self::PASS_FOLDER, self::PASS_ID)->shouldFileNotExist();
     }
 
     public function it_creates_pass()
     {
-        $photoPath = self::PASS_FOLDER . self::PASS_FILE_NAME . PassManager::FILE_EXTENSION;
+        $photoPath = self::PASS_FOLDER . self::PASS_ID . PassManager::FILE_EXTENSION;
         $image = imagecreatetruecolor(1, 1);
         ob_start();
         imagepng($image);
         $imageBlob = ob_get_clean();
-        $this->createPass('b', self::PASS_FOLDER, 'c', $photoPath, $imageBlob, 'd')->shouldFileExist('b');
+        $this->createPass('b', self::PASS_FOLDER, 'c', $photoPath, $imageBlob)->shouldFileExist('b');
     }
 
     public function letGo()

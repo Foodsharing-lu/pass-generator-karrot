@@ -20,8 +20,8 @@ class Interactor
 
     public function logIn(string $eMailAddress, string $password): void
     {
-        $groupId = $this->config->get('karrot-group-id');
-        $this->authenticator->logIn($eMailAddress, $password, $groupId);
+        $groupIds = $this->config->getArray('karrot-group-ids');
+        $this->authenticator->logIn($eMailAddress, $password, $groupIds);
     }
 
     public function isLoggedIn(): bool
@@ -125,7 +125,7 @@ class Interactor
         $url = $this->getPassUrlPrefix() . $fileName;
         $qrCodeImageBlob = QRCodeImageGenerator::create($url, 150);
 
-        PassManager::createPass($id, $imageFolderPath, $name, $photoUrl, $qrCodeImageBlob, $url);
+        PassManager::createPass($id, $imageFolderPath, $name, $photoUrl, $qrCodeImageBlob);
     }
 
     public function hasUserFullName(): bool

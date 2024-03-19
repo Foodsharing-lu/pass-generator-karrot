@@ -29,7 +29,7 @@ class Authenticator
         return isset($_SESSION['token']) && $_SESSION['token'] !== '';
     }
 
-    public function logIn(string $eMailAddress, string $password, string $groupId): void
+    public function logIn(string $eMailAddress, string $password, array $groupIds): void
     {
         if (!isset($eMailAddress) || $eMailAddress === '' || !isset($password) || $password === '') {
             throw new InvalidCredentialsException();
@@ -80,30 +80,38 @@ class Authenticator
         if (!empty($userResponseBody['photo_urls'])) {
             $userPhotoUrl = $userResponseBody['photo_urls']['full_size'];
         }
-        try {
-            $groupResponse = $this->client->request('GET', 'groups/' . $groupId, [
-                'headers' => [
-                    'Authorization' => 'Token ' . $token
-                ]
-            ]);
-        } catch (\GuzzleHttp\Exception\ConnectException) {
-            throw new ConnectException();
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            // A 404 error response is returned when the user requests the details of a group they are not member of.
-            $eRequest = Psr7\Message::toString($e->getRequest());
-            $eResponse = Psr7\Message::toString($e->getResponse());
-            throw new UserNotInGroupException($eRequest . ' ' . $eResponse);
-        } catch (\GuzzleHttp\Exception\RequestException $e) {
-            $eRequest = Psr7\Message::toString($e->getRequest());
-            $eResponse = '';
-            if ($e->hasResponse()) {
-                $eResponse = Psr7\Message::toString($e->getResponse());
+        $isMemberOfOneGroup = false;
+        for ($i = 0; $i < count($groupIds); $i++) {
+            $groupId = $groupIds[$i];
+            try {
+                $groupResponse = $this->client->request('GET', 'groups/' . $groupId, [
+                    'headers' => [
+                        'Authorization' => 'Token ' . $token
+                    ]
+                ]);
+            } catch (\GuzzleHttp\Exception\ConnectException) {
+                throw new ConnectException();
+            } catch (\GuzzleHttp\Exception\ClientException $e) {
+                // A 404 error response is returned when the user requests the details of a group they are not member of.
+                continue;
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                $eRequest = Psr7\Message::toString($e->getRequest());
+                $eResponse = '';
+                if ($e->hasResponse()) {
+                    $eResponse = Psr7\Message::toString($e->getResponse());
+                }
+                throw new \Exception($eRequest . ' ' . $eResponse);
             }
-            throw new \Exception($eRequest . ' ' . $eResponse);
+            $groupResponseBody = json_decode($groupResponse->getBody(), true);
+            if (!in_array($userId, $groupResponseBody['members'])) {
+                continue;
+            } else {
+                $isMemberOfOneGroup = true;
+                break;
+            }
         }
-        $groupResponseBody = json_decode($groupResponse->getBody(), true);
-        if (!in_array($userId, $groupResponseBody['members'])) {
-            throw new UserNotInGroupException('User with id ' . $userId . ' not in group with id ' . $groupId);
+        if (!$isMemberOfOneGroup) {
+            throw new UserNotInGroupException('User with id ' . $userId . ' not in any of the groups: ' . implode(", ",$groupIds));
         }
         if ($tokenResponse->getStatusCode() == 200) {
             LoggerWrapper::info('User logged in', ['id' => $userId]);

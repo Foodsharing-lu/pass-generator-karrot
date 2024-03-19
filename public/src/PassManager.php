@@ -40,8 +40,7 @@ class PassManager
         string $imageFolderPath,
         string $name,
         string $photoUrl,
-        string $qrCodeImageBlob,
-        string $url
+        string $qrCodeImageBlob
     ): void {
         LoggerWrapper::info('Creating pass', ['userId' => $id]);
 
@@ -63,7 +62,7 @@ class PassManager
 
         // Add all images.
         $canvas->compositeImage($background, \Imagick::COMPOSITE_COPY, 0, 0);
-        $canvas->compositeImage($qrCode, \Imagick::COMPOSITE_COPY, 70, 290);
+        $canvas->compositeImage($qrCode, \Imagick::COMPOSITE_COPY, 200, 290);
         $canvas->compositeImage($photo, \Imagick::COMPOSITE_COPY, 540, 230);
 
         // Add text.
@@ -71,10 +70,12 @@ class PassManager
         $draw->setFillColor('black');
         $draw->setFont(__DIR__ . '/../assets/fonts/DejaVuSans.ttf');
         $draw->setFontSize(36);
-        $canvas->annotateImage($draw, 210, 210, 0, $name);
-        $canvas->annotateImage($draw, 210, 260, 0, 'Foodsaver');
+        $canvas->annotateImage($draw, 210, 200, 0, $name);
+        $canvas->annotateImage($draw, 210, 245, 0, 'Foodsaver');
         $draw->setFontSize(18);
-        $canvas->annotateImage($draw, 80, 450, 0, $url);
+        $currentYear = date('Y');
+        $canvas->annotateImage($draw, 210, 270, 0, 'Year of validity: ' . $currentYear);
+        $canvas->annotateImage($draw, 210, 450, 0, 'Scan to check existence.');
         $canvas->annotateImage($draw, 540, 450, 0, 'ID: ' . $id);
 
         // Save image.
