@@ -74,7 +74,7 @@ class PassManager
         $canvas->annotateImage($draw, 210, 245, 0, 'Foodsaver');
         $draw->setFontSize(18);
         $currentYear = date('Y');
-        $canvas->annotateImage($draw, 210, 270, 0, 'Year of validity: ' . $currentYear);
+        $canvas->annotateImage($draw, 210, 270, 0, 'Valid until: 31.12.' . $currentYear);
         $canvas->annotateImage($draw, 210, 450, 0, 'Scan to check existence.');
         $canvas->annotateImage($draw, 540, 450, 0, 'ID: ' . $id);
 
