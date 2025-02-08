@@ -7,7 +7,7 @@ At the end, they can log out.
 It uses the [Karrot API](https://karrot.world/docs/).
 
 ## Technologies
-PHP 8 is used.
+PHP 8.3 is used.
 Composer is used as dependency manager.
 
 ### Libraries used

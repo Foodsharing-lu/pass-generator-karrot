@@ -16,14 +16,15 @@ class QRCodeImageGenerator
         LoggerWrapper::info('Generating QR code image', ['url' => $url]);
 
         $sizeWithoutMargin = $size - 2 * self::MARGIN_IN_PIXELS;
-        $result = Builder::create()
-            ->data($url)
-            ->encoding(new Encoding('UTF-8'))
-            ->errorCorrectionLevel(ErrorCorrectionLevel::Quartile)
-            ->size($sizeWithoutMargin)
-            ->margin(self::MARGIN_IN_PIXELS)
-            ->roundBlockSizeMode(RoundBlockSizeMode::None)
-            ->build();
+        $builder = new Builder(
+            data: $url,
+            encoding: new Encoding('UTF-8'),
+            errorCorrectionLevel: ErrorCorrectionLevel::Quartile,
+            size: $sizeWithoutMargin,
+            margin: self::MARGIN_IN_PIXELS,
+            roundBlockSizeMode: RoundBlockSizeMode::None,
+        );
+        $result = $builder->build();
         return $result->getString();
     }
 }

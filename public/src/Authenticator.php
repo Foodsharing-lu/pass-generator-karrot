@@ -111,7 +111,7 @@ class Authenticator
             }
         }
         if (!$isMemberOfOneGroup) {
-            throw new UserNotInGroupException('User with id ' . $userId . ' not in any of the groups: ' . implode(", ",$groupIds));
+            throw new UserNotInGroupException('User with id ' . $userId . ' not in any of the groups: ' . implode(", ", $groupIds));
         }
         if ($tokenResponse->getStatusCode() == 200) {
             LoggerWrapper::info('User logged in', ['id' => $userId]);
